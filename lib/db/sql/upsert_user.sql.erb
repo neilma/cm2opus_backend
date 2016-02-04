@@ -1,0 +1,9 @@
+merge into <%= @db_schema %>.useraccount t using (
+  select (select supplier_id from  <%= @db_schema %>.supplier where contact_manager_id = '<%= @contact_manager_id %>') new_supplier_id_fk from SYSIBM.DUAL
+) as s
+on s.new_supplier_id_fk = t.supplier_id_fk
+when not matched then
+  INSERT (t.useraccount_id, t.username, t.is_internal, t.role_id_fk, t.email, t.cac_id_fk, t.created_by, t.created_date, t.modified_date, t.modified_by, t.version, t.conversion, t.status, t.supplier_id_fk)
+  VALUES('<%= @supplier_id %>', '<%= @supplier_id %>','0', (SELECT ROLE_ID
+FROM <%= @db_schema %>.ROLE
+WHERE ROLE_NAME = '<%= @role_name || "Repairer" %>') ,'<%= @email %>','CC','cm2opus',CURRENT TIMESTAMP,CURRENT TIMESTAMP,'cm2opus',0,0,'A',(select supplier_id from  <%= @db_schema %>.supplier where contact_manager_id = '<%= @contact_manager_id %>'))

@@ -1,0 +1,15 @@
+<soapenv:Envelope xmlns:soapenv="http://schemas.xmlsoap.org/soap/envelope/" xmlns:soap="http://guidewire.com/ws/soapheaders" xmlns:abc="http://guidewire.com/ab/ws/gw/webservice/ab/ab700/abcontactapi/ABContactAPI">
+   <soapenv:Header>
+      <soap:locale>en_AU</soap:locale>
+      <soap:authentication>
+         <soap:username>su</soap:username>
+         <soap:password>gw</soap:password>
+      </soap:authentication>
+   </soapenv:Header>
+   <soapenv:Body>
+      <abc:retrieveContact>
+         <!--Optional:-->
+         <abc:linkID><%= @link_id %></abc:linkID>
+      </abc:retrieveContact>
+   </soapenv:Body>
+</soapenv:Envelope>

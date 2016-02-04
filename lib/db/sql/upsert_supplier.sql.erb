@@ -1,0 +1,10 @@
+merge into <%= @db_schema %>.supplier t using (
+  select '<%= @contact_manager_id %>' new_contact_manager_id from SYSIBM.DUAL
+) as s
+on s.new_contact_manager_id = t.contact_manager_id
+when matched then
+  update set t.supplier_name = '<%= @supplier_name %>', t.abn = '<%= @abn %>', t.contact_name = '<%= @supplier_name %>', t.email = '<%= @email %>', t.work_phone = '<%= @work_phone %>', t.fax = '<%= @fax %>', t.emerg_phone = '<%= @work_phone %>', t.street = '<%= @street %>', t.suburb = '<%= @suburb %>', t.state = '<%= @state %>', t.postcode = '<%= @postcode %>', t.modified_date = CURRENT TIMESTAMP, t.modified_by = 'cm2opus'
+when not matched then
+  INSERT (t.SUPPLIER_ID, t.SUPPLIER_NAME, t.ABN, t.CONTACT_NAME, t.EMAIL, t.WORK_PHONE, t.FAX, t.EMERG_PHONE, t.STREET, t.SUBURB, t.STATE, t.POSTCODE, t.CREATED_BY, t.CREATED_DATE, t.MODIFIED_DATE, t.MODIFIED_BY, t.VERSION, t.CONVERSION, t.STATUS, t.IS_MERCURY, t.STORECREDIT_APPLY_DOB, t.STORECREDIT_NO_HOLDERS, t.DUNS, t.IS_MANUAL_ALLOCATION_ALLOWED, t.STORE_CREDIT_LIMIT, t.CONTACT_MANAGER_ID)
+  VALUES('<%= @supplier_id %>', '<%= @supplier_name %>', '<%= @abn %>', '<%= @supplier_name %>', '<%= @email %>', '<%= @work_phone %>', '<%= @fax %>', '<%= @work_phone %>', '<%= @street %>', '<%= @suburb %>', '<%= @state %>', '<%= @postcode %>', 'cm2opus', CURRENT TIMESTAMP, CURRENT TIMESTAMP, 'cm2opus', 6, 10, 'A', '1', '1', 1, '', '1', 99999.0, '<%= @contact_manager_id %>')
+

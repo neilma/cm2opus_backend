@@ -1,0 +1,25 @@
+<soapenv:Envelope xmlns:soapenv="http://schemas.xmlsoap.org/soap/envelope/" xmlns:soap="http://guidewire.com/ws/soapheaders" xmlns:abc="http://guidewire.com/ab/ws/gw/webservice/ab/ab700/abcontactapi/ABContactAPI" xmlns:abc1="http://guidewire.com/ab/ws/gw/webservice/ab/ab700/abcontactapi/ABContactSearchCriteriaInfo" xmlns:add="http://guidewire.com/ab/ws/gw/webservice/ab/ab700/abcontactapi/AddressSearchInfo" xmlns:prox="http://guidewire.com/ab/ws/gw/webservice/ab/ab700/abcontactapi/ProximitySearchParametersInfo" xmlns:abc2="http://guidewire.com/ab/ws/gw/webservice/ab/ab700/abcontactapi/ABContactAPISearchSpecInfo" xmlns:abc3="http://guidewire.com/ab/ws/gw/webservice/ab/ab700/abcontactapi/ABContactSearchSortColumnInfo" xmlns:abc4="http://guidewire.com/ab/ws/gw/webservice/ab/ab700/abcontactapi/ABContactAPISubtypeFilter" xmlns:abc5="http://guidewire.com/ab/ws/gw/webservice/ab/ab700/abcontactapi/ABContactAPITagMatcher">
+   <soapenv:Header>
+      <soap:locale>en_AU</soap:locale>
+      <soap:authentication>
+         <soap:username><%= @username %></soap:username>
+         <soap:password><%= @password %></soap:password>
+      </soap:authentication>
+   </soapenv:Header>
+   <soapenv:Body>
+      <abc:searchContact>
+         <abc:abContactSearchCriteriaInfo>
+            <abc1:CGU_EC_SpecialityFilter_1><%= @specialty %></abc1:CGU_EC_SpecialityFilter_1>
+            <abc1:ContactType>ABContact</abc1:ContactType>
+            <abc1:Keyword><%= @keyword %></abc1:Keyword>
+         </abc:abContactSearchCriteriaInfo>
+         <abc:abContactAPISearchSpecInfo>
+            <abc2:SubtypeFilter>
+               <abc4:Subtypes>
+                  <abc4:Entry>ABContact</abc4:Entry>
+               </abc4:Subtypes>
+            </abc2:SubtypeFilter>
+         </abc:abContactAPISearchSpecInfo>
+      </abc:searchContact>
+   </soapenv:Body>
+</soapenv:Envelope>
