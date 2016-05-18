@@ -5,3 +5,4 @@
 #
 #   cities = City.create([{ name: 'Chicago' }, { name: 'Copenhagen' }])
 #   Mayor.create(name: 'Emanuel', city: cities.first)
+User.new({email:"admin@cm2opus.com", password:"gw", password_confirmation:"gw", reset_password_token: SecureRandom.uuid.gsub(/\-/,'')}).save(validate: false)

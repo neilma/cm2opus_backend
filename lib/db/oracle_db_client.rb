@@ -5,8 +5,8 @@ class OracleDbClient
   include ApplicationHelper
   attr_accessor :db_config, :username, :password, :db_env
 
-  def initialize(username=nil, password=nil, db_env=:virtual)
-    @db_env = db_env || :virtual
+  def initialize(db_env, username=nil, password=nil)
+    @db_env = db_env
     @db_config = load_config
     @username = username || db_config[:username]
     @password = password || db_config[:password]

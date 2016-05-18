@@ -17,3 +17,5 @@
 /config/cm.yml
 /config/client_db.yml
 /config/secrets.yml
+/lib/db/sql/
+/lib/ws/*.erb

@@ -6,6 +6,12 @@ class ContactManagerController < ApplicationController
   CM_FIELDS = %w(link_id abn_ext email_address1 fax_phone home_phone work_phone name)
   CM_PRIMARY_ADDR_FIELDS = %w(address_line1 city state postal_code)
 
+  before_action :authenticate_user!, unless: :has_client_token?
+
+  def has_client_token?
+    User.find_by_reset_password_token(request.params[:authenticity_token]).present?
+  end
+
   def search_contacts
     wh = WebServiceHelper.new(params[:cm_env], params[:operation],
                               "#{Rails.root}/lib/ws/#{params[:operation]}.xml.erb", params[:contact_manager])
@@ -47,7 +53,7 @@ class ContactManagerController < ApplicationController
   end
 
   def query_opus(sql_query, transaction_type='db_query')
-    OracleDbClient.new(nil, nil, params[:opus_env]).query(sql_query, transaction_type)
+    OracleDbClient.new(params[:opus_env], nil, nil).query(sql_query, transaction_type)
   end
 
   def build_sql(sql_erb_file_path)

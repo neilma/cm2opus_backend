@@ -41,3 +41,7 @@ gem 'tzinfo-data'
 gem 'savon'
 
 gem 'pry'
+
+gem 'devise'
+
+gem 'angular_rails_csrf'

@@ -1,4 +1,5 @@
 Rails.application.routes.draw do
+  devise_for :users, :controllers => { sessions: 'sessions' }
   # The priority is based upon order of creation: first created -> highest priority.
   # See how all your routes lay out with "rake routes".
 
@@ -9,6 +10,9 @@ Rails.application.routes.draw do
   #   get 'products/:id' => 'catalog#view'
   post 'cm/search_contact/' => 'contact_manager#search_contacts'
   post 'cm/sync_contact/' => 'contact_manager#sync_contacts'
+  devise_scope :user do
+    match 'users/sign_in' => 'sessions#create', :via => [:options]
+    end
 
   # Example of named route that can be invoked with purchase_url(id: product.id)
   #   get 'products/:id/purchase' => 'catalog#purchase', as: :purchase
